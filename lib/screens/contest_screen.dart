@@ -11,7 +11,7 @@ class ContestScreen extends StatelessWidget {
         itemBuilder: (ctx, index) {
           return const ContestDetail();
         },
-        itemCount: 1,
+        itemCount: 20,
       ),
     );
   }
