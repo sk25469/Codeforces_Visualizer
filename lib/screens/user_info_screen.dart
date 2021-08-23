@@ -1,54 +1,32 @@
-import 'dart:collection';
-
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:codeforces_visualizer/ChartSeries/problem_rating_series.dart';
+import 'package:codeforces_visualizer/ChartSeries/problem_topic_series.dart';
+import 'package:codeforces_visualizer/models/problem_detail_by_tags.dart';
+import 'package:codeforces_visualizer/widgets/chart.dart';
 import 'package:flutter/material.dart';
 
 import 'package:codeforces_visualizer/dummy_data.dart';
-import 'package:codeforces_visualizer/models/problem_detail.dart';
+import 'package:codeforces_visualizer/models/problem_detail_by_rating.dart';
 
 class UserInfoScreen extends StatelessWidget {
   const UserInfoScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<ProblemDetail> data = DummyData().getProblemDetails();
-
-    var series = [
-      charts.Series(
-        domainFn: (ProblemDetail problemDetail, _) =>
-            problemDetail.rating.toString(),
-        measureFn: (ProblemDetail problemDetail, _) => problemDetail.quesCnt,
-        colorFn: (something, _) => charts.Color.fromHex(code: "#800000"),
-        id: 'Clicks',
-        data: data,
-      ),
-    ];
+    List<ProblemDetailByRating> ratingData =
+        DummyData().getProblemDetailsByRating();
+    List<ProblemDetailByTags> tagData = DummyData().getProblemDetailsByTags();
 
     var barChart = charts.BarChart(
-      series,
+      ProblemRatingSeries(ratingData).getSeries(),
       animate: false,
     );
 
     var pieChart = charts.PieChart(
-      series,
+      ProblemTopicSeries(tagData).getSeries(),
       animate: false,
     );
 
-    var barChartWidget = Padding(
-      padding: const EdgeInsets.all(32.0),
-      child: SizedBox(
-        height: 200.0,
-        child: barChart,
-      ),
-    );
-
-    var pieChartWidget = Padding(
-      padding: const EdgeInsets.all(32.0),
-      child: SizedBox(
-        height: 200.0,
-        child: pieChart,
-      ),
-    );
     return Column(
       children: [
         Container(
@@ -58,13 +36,13 @@ class UserInfoScreen extends StatelessWidget {
                 elevation: 5,
                 shadowColor: const Color.fromRGBO(255, 10, 10, 50),
                 borderOnForeground: true,
-                child: barChartWidget,
+                child: Chart(barChart),
               ),
               Card(
                 elevation: 5,
                 shadowColor: const Color.fromRGBO(255, 10, 10, 50),
                 borderOnForeground: true,
-                child: pieChartWidget,
+                child: Chart(pieChart),
               ),
             ],
           ),

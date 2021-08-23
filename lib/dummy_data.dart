@@ -1,8 +1,12 @@
 import 'dart:collection';
 
-import 'package:codeforces_visualizer/models/problem.dart';
+import 'package:codeforces_visualizer/models/problem_detail_by_tags.dart';
+import 'package:codeforces_visualizer/tag_colors.dart';
+import 'package:flutter/material.dart';
 
-import 'models/problem_detail.dart';
+import './models/problem.dart';
+
+import 'models/problem_detail_by_rating.dart';
 
 class DummyData {
   static final List<Problem> problemList = [
@@ -32,27 +36,53 @@ class DummyData {
     ),
   ];
 
-  final _quesCount = HashMap<int, int>();
-  final List<ProblemDetail> _data = [];
+  final _quesCountByRating = HashMap<int, int>();
+  final _quesCountByTopic = HashMap<String, int>();
+  final List<ProblemDetailByRating> _ratingData = [];
+  final List<ProblemDetailByTags> _tagData = [];
 
   DummyData();
 
-  void getQuesCount() {
+  void _getQuesCountByTopic() {
     for (int i = 0; i < problemList.length; i++) {
-      _quesCount[problemList[i].rating] = 0;
+      for (int j = 0; j < problemList[i].tags.length; j++) {
+        _quesCountByTopic[problemList[i].tags[j]] = 0;
+      }
     }
 
     for (int i = 0; i < problemList.length; i++) {
-      _quesCount[problemList[i].rating] =
-          _quesCount[problemList[i].rating]! + 1;
+      for (int j = 0; j < problemList[i].tags.length; j++) {
+        _quesCountByTopic[problemList[i].tags[j]] =
+            _quesCountByTopic[problemList[i].tags[j]]! + 1;
+      }
     }
   }
 
-  List<ProblemDetail> getProblemDetails() {
-    getQuesCount();
-    _quesCount.forEach((key, value) {
-      _data.add(ProblemDetail(value, key));
+  void _getQuesCountByRating() {
+    for (int i = 0; i < problemList.length; i++) {
+      _quesCountByRating[problemList[i].rating] = 0;
+    }
+
+    for (int i = 0; i < problemList.length; i++) {
+      _quesCountByRating[problemList[i].rating] =
+          _quesCountByRating[problemList[i].rating]! + 1;
+    }
+  }
+
+  List<ProblemDetailByRating> getProblemDetailsByRating() {
+    _getQuesCountByRating();
+    _quesCountByRating.forEach((key, value) {
+      _ratingData.add(ProblemDetailByRating(value, key));
     });
-    return _data;
+    return [..._ratingData];
+  }
+
+  List<ProblemDetailByTags> getProblemDetailsByTags() {
+    _getQuesCountByTopic();
+    _quesCountByTopic.forEach((key, value) {
+      _tagData
+          .add(ProblemDetailByTags(value, key, TagColors.colors[key] as Color));
+    });
+    return [..._tagData];
   }
 }
