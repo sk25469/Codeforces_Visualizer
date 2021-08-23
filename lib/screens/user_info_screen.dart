@@ -19,12 +19,12 @@ class UserInfoScreen extends StatelessWidget {
 
     var barChart = charts.BarChart(
       ProblemRatingSeries(ratingData).getSeries(),
-      animate: false,
+      animate: true,
     );
 
     var pieChart = charts.PieChart(
       ProblemTopicSeries(tagData).getSeries(),
-      animate: false,
+      animate: true,
     );
 
     return Column(
