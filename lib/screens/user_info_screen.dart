@@ -2,7 +2,7 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:codeforces_visualizer/models/problem_detail_by_tags.dart';
 import 'package:codeforces_visualizer/series/problem_rating_series.dart';
 import 'package:codeforces_visualizer/series/problem_topic_series.dart';
-import 'package:codeforces_visualizer/widgets/chart.dart';
+import 'package:codeforces_visualizer/widgets/pie_chart.dart';
 import 'package:flutter/material.dart';
 
 import 'package:codeforces_visualizer/dummy_data.dart';
@@ -41,7 +41,13 @@ class UserInfoScreen extends StatelessWidget {
         Card(
           elevation: 5,
           borderOnForeground: true,
-          child: Chart(barChart),
+          child: Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: SizedBox(
+              height: 200.0,
+              child: barChart,
+            ),
+          ),
         ),
         const Padding(
           padding: EdgeInsets.only(top: 8),
@@ -63,7 +69,7 @@ class UserInfoScreen extends StatelessWidget {
                 child: Card(
                   elevation: 5,
                   borderOnForeground: true,
-                  child: Chart(pieChart),
+                  child: PieChart(pieChart),
                 ),
               ),
             ),
