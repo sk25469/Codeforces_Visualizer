@@ -29,23 +29,63 @@ class UserInfoScreen extends StatelessWidget {
 
     return Column(
       children: [
-        Container(
-          child: Column(
-            children: [
-              Card(
-                elevation: 5,
-                shadowColor: const Color.fromRGBO(255, 10, 10, 50),
-                borderOnForeground: true,
-                child: Chart(barChart),
-              ),
-              Card(
-                elevation: 5,
-                shadowColor: const Color.fromRGBO(255, 10, 10, 50),
-                borderOnForeground: true,
-                child: Chart(pieChart),
-              ),
-            ],
+        const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text(
+            'Problem Rating of imSahil169',
+            style: TextStyle(
+              fontSize: 18,
+            ),
           ),
+        ),
+        Card(
+          elevation: 5,
+          borderOnForeground: true,
+          child: Chart(barChart),
+        ),
+        const Padding(
+          padding: EdgeInsets.only(top: 8),
+          child: Text(
+            'Tags of imSahil169',
+            style: TextStyle(
+              fontSize: 18,
+            ),
+          ),
+        ),
+        Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 8),
+              child: Container(
+                alignment: Alignment.centerLeft,
+                width: 230,
+                height: 250,
+                child: Card(
+                  elevation: 5,
+                  borderOnForeground: true,
+                  child: Chart(pieChart),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8, right: 8),
+              child: Container(
+                width: 135,
+                height: 220,
+                child: const Card(
+                  elevation: 5,
+                  borderOnForeground: true,
+                  child: Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: Text(
+                      'Legends',
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+              ),
+            )
+          ],
         ),
       ],
     );
