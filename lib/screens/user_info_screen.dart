@@ -1,7 +1,7 @@
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:codeforces_visualizer/ChartSeries/problem_rating_series.dart';
-import 'package:codeforces_visualizer/ChartSeries/problem_topic_series.dart';
 import 'package:codeforces_visualizer/models/problem_detail_by_tags.dart';
+import 'package:codeforces_visualizer/series/problem_rating_series.dart';
+import 'package:codeforces_visualizer/series/problem_topic_series.dart';
 import 'package:codeforces_visualizer/widgets/chart.dart';
 import 'package:flutter/material.dart';
 
