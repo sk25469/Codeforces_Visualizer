@@ -58,41 +58,7 @@ class UserInfoScreen extends StatelessWidget {
             ),
           ),
         ),
-        Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 8),
-              child: Container(
-                alignment: Alignment.centerLeft,
-                width: 230,
-                height: 250,
-                child: Card(
-                  elevation: 5,
-                  borderOnForeground: true,
-                  child: PieChart(pieChart),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8, right: 8),
-              child: Container(
-                width: 135,
-                height: 220,
-                child: const Card(
-                  elevation: 5,
-                  borderOnForeground: true,
-                  child: Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: Text(
-                      'Legends',
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ),
-              ),
-            )
-          ],
-        ),
+        PieChart(pieChart),
       ],
     );
   }
