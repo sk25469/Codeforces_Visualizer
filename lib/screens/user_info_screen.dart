@@ -50,7 +50,7 @@ class UserInfoScreen extends StatelessWidget {
           ),
         ),
         const Padding(
-          padding: EdgeInsets.only(top: 8),
+          padding: EdgeInsets.only(top: 8, bottom: 8),
           child: Text(
             'Tags of imSahil169',
             style: TextStyle(

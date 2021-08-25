@@ -11,30 +11,44 @@ class PieChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 5,
+      elevation: 6,
       child: Container(
         color: Colors.white,
-        height: 220.0,
+        height: 210.0,
         width: double.infinity,
         child: Stack(
           children: <Widget>[
             Positioned(
-              top: 30.0,
+              top: 5.0,
               right: 5.0,
-              child: Container(
-                height: 180,
-                width: 200,
-                color: Colors.white,
-                child: chartType,
+              child: Card(
+                elevation: 4,
+                child: InkWell(
+                  onTap: () {},
+                  child: Container(
+                    height: 190,
+                    width: 200,
+                    color: Colors.white,
+                    child: chartType,
+                  ),
+                ),
               ),
             ),
             Positioned(
-              top: 30,
+              top: 20,
               bottom: 20.0,
               left: 10.0,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: legendsList(),
+              ),
+            ),
+            const Positioned(
+              top: 180,
+              right: 25.0,
+              child: Text(
+                'Details',
+                style: TextStyle(fontSize: 10),
               ),
             ),
           ],
