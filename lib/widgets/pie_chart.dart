@@ -1,5 +1,7 @@
-import 'package:codeforces_visualizer/widgets/legends_widget.dart';
+import 'package:codeforces_visualizer/models/tags.dart';
 import 'package:flutter/material.dart';
+
+import '../tag_colors.dart';
 
 class PieChart extends StatelessWidget {
   final Widget chartType;
@@ -32,7 +34,7 @@ class PieChart extends StatelessWidget {
               left: 10.0,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: LegendsList(),
+                children: legendsList(),
               ),
             ),
           ],
@@ -40,4 +42,29 @@ class PieChart extends StatelessWidget {
       ),
     );
   }
+}
+
+List<Widget> legendsList() {
+  List<Tag> tagColor = [];
+  TagColors.colors.forEach((tag, color) {
+    tagColor.add(Tag(color, tag));
+  });
+  return tagColor.map(
+    (value) {
+      return Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Container(width: 10.0),
+          Container(
+            color: value.color,
+            width: 10.0,
+            height: 15.0,
+          ),
+          Container(width: 5.0),
+          Text(value.tag),
+        ],
+      );
+    },
+  ).toList();
 }
