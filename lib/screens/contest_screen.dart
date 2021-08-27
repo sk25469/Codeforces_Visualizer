@@ -6,12 +6,40 @@ class ContestScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ListView.builder(
-        itemBuilder: (ctx, index) {
-          return const ContestDetail();
-        },
-        itemCount: 20,
+    var mediaQuery = MediaQuery.of(context);
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            color: Colors.white,
+            height: (mediaQuery.size.height -
+                    mediaQuery.padding.top -
+                    mediaQuery.padding.bottom) *
+                0.2,
+            width: double.infinity,
+            child: const Center(
+              child: Text(
+                'Upcoming Contests',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          Container(
+            height: (mediaQuery.size.height -
+                    mediaQuery.padding.top -
+                    mediaQuery.padding.bottom) *
+                0.7,
+            child: ListView.builder(
+              itemBuilder: (ctx, index) {
+                return const ContestDetail();
+              },
+              itemCount: 20,
+            ),
+          ),
+        ],
       ),
     );
   }
