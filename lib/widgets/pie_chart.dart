@@ -12,46 +12,45 @@ class PieChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 6,
-      child: Container(
-        color: Colors.white,
-        height: 210.0,
-        width: double.infinity,
-        child: Stack(
-          children: <Widget>[
-            Positioned(
-              top: 5.0,
-              right: 5.0,
-              child: Card(
-                elevation: 4,
-                child: InkWell(
-                  onTap: () {},
-                  child: Container(
-                    height: 190,
-                    width: 200,
-                    color: Colors.white,
-                    child: chartType,
-                  ),
+      child: InkWell(
+        onTap: () {
+          // print('Pressed card');
+        },
+        child: Container(
+          color: Colors.white,
+          height: 210.0,
+          width: double.infinity,
+          child: Stack(
+            children: <Widget>[
+              Positioned(
+                top: 5.0,
+                right: 5.0,
+                child: Container(
+                  height: 190,
+                  width: 200,
+                  color: Colors.white,
+                  child: chartType,
                 ),
               ),
-            ),
-            Positioned(
-              top: 20,
-              bottom: 20.0,
-              left: 10.0,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: legendsList(),
+              Positioned(
+                top: 20,
+                bottom: 20.0,
+                left: 10.0,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: legendsList(),
+                ),
               ),
-            ),
-            const Positioned(
-              top: 180,
-              right: 25.0,
-              child: Text(
-                'Details',
-                style: TextStyle(fontSize: 10),
+              const Positioned(
+                top: 180,
+                right: 25.0,
+                child: Text(
+                  'Details',
+                  style: TextStyle(fontSize: 10),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
