@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:titled_navigation_bar/titled_navigation_bar.dart';
 
 class TabsScreen extends StatefulWidget {
+  static const routeName = '/tab-screen';
   @override
   _TabsScreenState createState() => _TabsScreenState();
 }

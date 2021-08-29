@@ -2,6 +2,7 @@ import 'package:codeforces_visualizer/widgets/contest_details.dart';
 import 'package:flutter/material.dart';
 
 class ContestScreen extends StatelessWidget {
+  static const routeName = '/contest-screen';
   const ContestScreen({Key? key}) : super(key: key);
 
   @override

@@ -9,6 +9,7 @@ import 'package:codeforces_visualizer/dummy_data.dart';
 import 'package:codeforces_visualizer/models/problem_detail_by_rating.dart';
 
 class UserInfoScreen extends StatelessWidget {
+  static const routeName = '/user_info-screen';
   const UserInfoScreen({Key? key}) : super(key: key);
 
   @override
