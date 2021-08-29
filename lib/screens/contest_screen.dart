@@ -1,4 +1,7 @@
+import 'package:codeforces_visualizer/repository/api_model/data.dart';
+import 'package:codeforces_visualizer/repository/retrofit/api_client.dart';
 import 'package:codeforces_visualizer/widgets/contest_details.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class ContestScreen extends StatelessWidget {
@@ -28,19 +31,65 @@ class ContestScreen extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            height: (mediaQuery.size.height -
-                    mediaQuery.padding.top -
-                    mediaQuery.padding.bottom) *
-                0.7,
-            child: ListView.builder(
-              itemBuilder: (ctx, index) {
-                return const ContestDetail();
-              },
-              itemCount: 20,
-            ),
-          ),
+          _buildBody(context),
         ],
+      ),
+    );
+  }
+
+  FutureBuilder<ResponseData> _buildBody(BuildContext context) {
+    var _mediaQuery = MediaQuery.of(context);
+    final client = ApiClient(Dio(BaseOptions(contentType: "application/json")));
+    return FutureBuilder<ResponseData>(
+      future: client.getContests(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          final ResponseData? posts = snapshot.data;
+          print(posts!.data.length);
+          return _buildListView(
+            mediaQuery: _mediaQuery,
+            posts: posts,
+          );
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
+    );
+  }
+}
+
+class _buildListView extends StatelessWidget {
+  const _buildListView({
+    Key? key,
+    required this.mediaQuery,
+    required this.posts,
+  }) : super(key: key);
+
+  final MediaQueryData mediaQuery;
+  final ResponseData? posts;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: (mediaQuery.size.height -
+              mediaQuery.padding.top -
+              mediaQuery.padding.bottom) *
+          0.7,
+      child: ListView.builder(
+        itemBuilder: (ctx, index) {
+          if (posts!.data[index]['phase'] == 'BEFORE') {
+            return ContestDetail(
+              contestName: posts!.data[index]['name'],
+              startTime: posts!.data[index]['startTime'],
+              duration: posts!.data[index]['duration'],
+            );
+          } else {
+            return const Text('No Upcoming Contests Ahead');
+          }
+        },
+        itemCount: posts!.data.length,
       ),
     );
   }
