@@ -1,3 +1,4 @@
+import 'package:codeforces_visualizer/models/contest.dart';
 import 'package:codeforces_visualizer/repository/api_model/data.dart';
 import 'package:codeforces_visualizer/repository/retrofit/api_client.dart';
 import 'package:codeforces_visualizer/widgets/contest_details.dart';
@@ -72,27 +73,26 @@ class _buildListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<UpcomingContest> _upcomingContests = [];
+    for (int i = 0; i < posts!.result.length; i++) {
+      if (posts!.result[i]["phase"] == "BEFORE") {
+        _upcomingContests.add(
+          UpcomingContest(
+            duration: posts!.result[i]["durationSeconds"],
+            contestName: posts!.result[i]['name'],
+            startTime: posts!.result[i]["startTimeSeconds"],
+          ),
+        );
+      }
+    }
     return Container(
       height: (mediaQuery.size.height -
               mediaQuery.padding.top -
               mediaQuery.padding.bottom) *
-          0.7,
-      child: ListView.builder(
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-        itemBuilder: (ctx, index) {
-          if (posts!.result[index]['phase'] == 'BEFORE') {
-            return ContestDetail(
-              contestName: posts!.result[index]['name'],
-              startTime: posts!.result[index]['startTimeSeconds'],
-              duration: posts!.result[index]['durationSeconds'],
-            );
-          } else {
-            return const Text('No Upcoming Contests Ahead');
-          }
-        },
-        itemCount: posts!.result.length,
-      ),
+          0.6,
+      child: _upcomingContests.isNotEmpty
+          ? ContestDetail(upcomingContest: _upcomingContests)
+          : const Text('No upcoming Contests Ahead!'),
     );
   }
 }
