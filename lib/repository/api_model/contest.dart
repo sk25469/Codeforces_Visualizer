@@ -1,8 +1,8 @@
 class Contest {
   final String name;
   final String phase;
-  final DateTime startTime;
-  final DateTime duration;
+  final int startTime;
+  final int duration;
 
   Contest({
     required this.duration,
@@ -13,10 +13,10 @@ class Contest {
 
   factory Contest.fromJson(Map<String, dynamic> json) {
     return Contest(
-      name: json['name'],
-      phase: json['phase'],
-      startTime: json['startTimeSeconds'],
-      duration: json['durationSeconds'],
+      name: json["name"],
+      phase: json["phase"],
+      startTime: json["startTimeSeconds"],
+      duration: json["durationSeconds"],
     );
   }
 
@@ -24,8 +24,8 @@ class Contest {
     return {
       'name': name,
       'phase': phase,
-      'startTime': startTime,
-      'duration': duration,
+      'startTimeSeconds': startTime,
+      'durationSeconds': duration,
     };
   }
 }

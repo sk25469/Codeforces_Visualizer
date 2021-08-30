@@ -11,29 +11,27 @@ class ContestScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context);
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Container(
-            color: Colors.white,
-            height: (mediaQuery.size.height -
-                    mediaQuery.padding.top -
-                    mediaQuery.padding.bottom) *
-                0.2,
-            width: double.infinity,
-            child: const Center(
-              child: Text(
-                'Upcoming Contests',
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
+    return Column(
+      children: [
+        Container(
+          color: Colors.white,
+          height: (mediaQuery.size.height -
+                  mediaQuery.padding.top -
+                  mediaQuery.padding.bottom) *
+              0.2,
+          width: double.infinity,
+          child: const Center(
+            child: Text(
+              'Upcoming Contests',
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
-          _buildBody(context),
-        ],
-      ),
+        ),
+        _buildBody(context),
+      ],
     );
   }
 
@@ -45,7 +43,8 @@ class ContestScreen extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           final ResponseData? posts = snapshot.data;
-          print(posts!.data.length);
+          // print(posts!.result.length);
+          print(posts!.result[0]['name']);
           return _buildListView(
             mediaQuery: _mediaQuery,
             posts: posts,
@@ -60,6 +59,7 @@ class ContestScreen extends StatelessWidget {
   }
 }
 
+// ignore: camel_case_types
 class _buildListView extends StatelessWidget {
   const _buildListView({
     Key? key,
@@ -78,18 +78,20 @@ class _buildListView extends StatelessWidget {
               mediaQuery.padding.bottom) *
           0.7,
       child: ListView.builder(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
         itemBuilder: (ctx, index) {
-          if (posts!.data[index]['phase'] == 'BEFORE') {
+          if (posts!.result[index]['phase'] == 'BEFORE') {
             return ContestDetail(
-              contestName: posts!.data[index]['name'],
-              startTime: posts!.data[index]['startTime'],
-              duration: posts!.data[index]['duration'],
+              contestName: posts!.result[index]['name'],
+              startTime: posts!.result[index]['startTimeSeconds'],
+              duration: posts!.result[index]['durationSeconds'],
             );
           } else {
             return const Text('No Upcoming Contests Ahead');
           }
         },
-        itemCount: posts!.data.length,
+        itemCount: posts!.result.length,
       ),
     );
   }

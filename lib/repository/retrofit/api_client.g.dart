@@ -8,7 +8,7 @@ part of 'api_client.dart';
 
 class _ApiClient implements ApiClient {
   _ApiClient(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'https://gorest.co.in/public-api/';
+    baseUrl ??= 'https://codeforces.com/api';
   }
 
   final Dio _dio;

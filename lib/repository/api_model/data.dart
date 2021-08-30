@@ -5,8 +5,8 @@ part 'data.g.dart';
 class Contest {
   final String name;
   final String phase;
-  final DateTime startTime;
-  final DateTime duration;
+  final int startTime;
+  final int duration;
 
   Contest({
     required this.duration,
@@ -22,10 +22,9 @@ class Contest {
 
 @JsonSerializable()
 class ResponseData {
-  int code;
-  dynamic meta;
-  List<dynamic> data;
-  ResponseData({required this.code, this.meta, required this.data});
+  String status;
+  List<dynamic> result;
+  ResponseData({required this.status, required this.result});
   factory ResponseData.fromJson(Map<String, dynamic> json) =>
       _$ResponseDataFromJson(json);
   Map<String, dynamic> toJson() => _$ResponseDataToJson(this);
