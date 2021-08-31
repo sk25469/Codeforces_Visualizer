@@ -45,7 +45,7 @@ class ContestScreen extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           final ResponseData? posts = snapshot.data;
           // print(posts!.result.length);
-          print(posts!.result[0]['name']);
+          // print(posts!.result[0]['name']);
           return _buildListView(
             mediaQuery: _mediaQuery,
             posts: posts,
