@@ -1,4 +1,4 @@
-import 'package:codeforces_visualizer/models/contest.dart';
+import 'package:codeforces_visualizer/models/upcoming_contest.dart';
 import 'package:codeforces_visualizer/repository/api_model/data.dart';
 import 'package:codeforces_visualizer/repository/retrofit/api_client.dart';
 import 'package:codeforces_visualizer/widgets/contest_details.dart';

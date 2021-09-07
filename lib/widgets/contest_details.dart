@@ -1,4 +1,4 @@
-import 'package:codeforces_visualizer/models/contest.dart';
+import 'package:codeforces_visualizer/models/upcoming_contest.dart';
 import 'package:flutter/material.dart';
 
 class ContestDetail extends StatelessWidget {

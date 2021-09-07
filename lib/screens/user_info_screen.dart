@@ -5,8 +5,9 @@ import 'package:codeforces_visualizer/series/problem_topic_series.dart';
 import 'package:codeforces_visualizer/widgets/pie_chart.dart';
 import 'package:flutter/material.dart';
 
-import 'package:codeforces_visualizer/dummy_data.dart';
 import 'package:codeforces_visualizer/models/problem_detail_by_rating.dart';
+
+import '../problem_data.dart';
 
 class UserInfoScreen extends StatelessWidget {
   static const routeName = '/user_info-screen';
@@ -15,8 +16,8 @@ class UserInfoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<ProblemDetailByRating> ratingData =
-        DummyData().getProblemDetailsByRating();
-    List<ProblemDetailByTags> tagData = DummyData().getProblemDetailsByTags();
+        ProblemData().getProblemDetailsByRating();
+    List<ProblemDetailByTags> tagData = ProblemData().getProblemDetailsByTags();
 
     var barChart = charts.BarChart(
       ProblemRatingSeries(ratingData).getSeries(),

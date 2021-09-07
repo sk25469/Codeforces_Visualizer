@@ -8,40 +8,15 @@ import './models/problem.dart';
 
 import 'models/problem_detail_by_rating.dart';
 
-class DummyData {
-  static final List<Problem> problemList = [
-    Problem(
-      programmingLanguage: "GNU C++17",
-      rating: 1500,
-      tags: ["constructive algorithms", "math", "number theory"],
-      verdict: "OK",
-    ),
-    Problem(
-      programmingLanguage: "GNU C++17",
-      rating: 1500,
-      tags: ["dp", "greedy", "math", "sortings"],
-      verdict: "OK",
-    ),
-    Problem(
-      programmingLanguage: "GNU C++17",
-      rating: 1600,
-      tags: ["dfs and similar", "dsu", "graphs"],
-      verdict: "OK",
-    ),
-    Problem(
-      programmingLanguage: "GNU C++17",
-      rating: 1200,
-      tags: ["data structures", "greedy", "sortings"],
-      verdict: "OK",
-    ),
-  ];
+class ProblemData {
+  final List<Problem> problemList;
 
   final _quesCountByRating = HashMap<int, int>();
   final _quesCountByTopic = HashMap<String, int>();
   final List<ProblemDetailByRating> _ratingData = [];
   final List<ProblemDetailByTags> _tagData = [];
 
-  DummyData();
+  ProblemData(this.problemList);
 
   void _getQuesCountByTopic() {
     for (int i = 0; i < problemList.length; i++) {
