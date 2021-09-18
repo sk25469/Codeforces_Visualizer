@@ -1,8 +1,12 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:codeforces_visualizer/models/problem_detail_by_tags.dart';
+import 'package:codeforces_visualizer/repository/api_model/problem_data.dart';
+import 'package:codeforces_visualizer/repository/retrofit/api_client.dart';
 import 'package:codeforces_visualizer/series/problem_rating_series.dart';
 import 'package:codeforces_visualizer/series/problem_topic_series.dart';
 import 'package:codeforces_visualizer/widgets/pie_chart.dart';
+import '../models/problem.dart' as accepted_problem;
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import 'package:codeforces_visualizer/models/problem_detail_by_rating.dart';
@@ -15,9 +19,49 @@ class UserInfoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return _buildBody(context);
+  }
+}
+
+FutureBuilder<ProblemResponseData> _buildBody(BuildContext context) {
+  final client = ApiClient(Dio(BaseOptions(contentType: "application/json")));
+  return FutureBuilder<ProblemResponseData>(
+    future: client.getUserStatus(),
+    builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.done) {
+        final ProblemResponseData? posts = snapshot.data;
+        print(posts!.result.length);
+        print(posts.result[0]['programmingLanguage']);
+        return _buildCharts(posts);
+      } else {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      }
+    },
+  );
+}
+
+class _buildCharts extends StatelessWidget {
+  final ProblemResponseData? posts;
+  _buildCharts(this.posts);
+
+  @override
+  Widget build(BuildContext context) {
+    List<accepted_problem.Problem> problemData = [];
+    for (int i = 0; i < posts!.result.length; i++) {
+      if (posts!.result[i]['verdict'] == 'OK') {
+        problemData.add(accepted_problem.Problem(
+            programmingLanguage: posts!.result[i]['programmingLanguage'],
+            rating: posts!.result[i]['problem']['rating'],
+            tags: posts!.result[i]['problem']['tags'] as List<String>,
+            verdict: posts!.result[i]['verdict']));
+      }
+    }
     List<ProblemDetailByRating> ratingData =
-        ProblemData().getProblemDetailsByRating();
-    List<ProblemDetailByTags> tagData = ProblemData().getProblemDetailsByTags();
+        ProblemData(problemData).getProblemDetailsByRating();
+    List<ProblemDetailByTags> tagData =
+        ProblemData(problemData).getProblemDetailsByTags();
 
     var barChart = charts.BarChart(
       ProblemRatingSeries(ratingData).getSeries(),
@@ -28,7 +72,6 @@ class UserInfoScreen extends StatelessWidget {
       ProblemTopicSeries(tagData).getSeries(),
       animate: true,
     );
-
     return Column(
       children: [
         const Padding(

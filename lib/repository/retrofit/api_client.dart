@@ -1,4 +1,5 @@
 import 'package:codeforces_visualizer/repository/api_model/data.dart';
+import 'package:codeforces_visualizer/repository/api_model/problem_data.dart';
 import 'package:dio/dio.dart';
 import 'package:codeforces_visualizer/repository/retrofit/apis.dart';
 import 'package:retrofit/http.dart';
@@ -13,5 +14,5 @@ abstract class ApiClient {
   Future<ResponseData> getContests();
 
   @GET(Apis.userStatus)
-  Future<ResponseData> getUserStatus();
+  Future<ProblemResponseData> getUserStatus();
 }

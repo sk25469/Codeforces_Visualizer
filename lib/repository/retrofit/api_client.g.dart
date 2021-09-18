@@ -31,17 +31,17 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<ResponseData> getUserStatus() async {
+  Future<ProblemResponseData> getUserStatus() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ResponseData>(
+        _setStreamType<ProblemResponseData>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
-                .compose(_dio.options, '/user.status?handle=',
+                .compose(_dio.options, '/user.status?handle=imSahil169',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResponseData.fromJson(_result.data!);
+    final value = ProblemResponseData.fromJson(_result.data!);
     return value;
   }
 

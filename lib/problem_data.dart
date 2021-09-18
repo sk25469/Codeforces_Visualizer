@@ -55,8 +55,12 @@ class ProblemData {
   List<ProblemDetailByTags> getProblemDetailsByTags() {
     _getQuesCountByTopic();
     _quesCountByTopic.forEach((key, value) {
-      _tagData
-          .add(ProblemDetailByTags(value, key, TagColors.colors[key] as Color));
+      _tagData.add(ProblemDetailByTags(
+          value,
+          key,
+          TagColors.colors[key] == null
+              ? Colors.black
+              : TagColors.colors[key] as Color));
     });
     return [..._tagData];
   }

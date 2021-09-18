@@ -21,12 +21,12 @@ class Problem {
 }
 
 @JsonSerializable()
-class ResponseData {
+class ProblemResponseData {
   String status;
   List<dynamic> result;
 
-  ResponseData({required this.result, required this.status});
-  factory ResponseData.fromJson(Map<String, dynamic> json) =>
-      _$ResponseDataFromJson(json);
-  Map<String, dynamic> toJson() => _$ResponseDataToJson(this);
+  ProblemResponseData({required this.result, required this.status});
+  factory ProblemResponseData.fromJson(Map<String, dynamic> json) =>
+      _$ProblemResponseDataFromJson(json);
+  Map<String, dynamic> toJson() => _$ProblemResponseDataToJson(this);
 }
