@@ -8,18 +8,18 @@ part of 'data.dart';
 
 Contest _$ContestFromJson(Map<String, dynamic> json) {
   return Contest(
-    duration: json['durationSeconds'] as int,
+    duration: json['duration'] as int,
     name: json['name'] as String,
     phase: json['phase'] as String,
-    startTime: json['startTimeSeconds'] as int,
+    startTime: json['startTime'] as int,
   );
 }
 
 Map<String, dynamic> _$ContestToJson(Contest instance) => <String, dynamic>{
       'name': instance.name,
       'phase': instance.phase,
-      'startTimeSeconds': instance.startTime,
-      'durationSeconds': instance.duration,
+      'startTime': instance.startTime,
+      'duration': instance.duration,
     };
 
 ResponseData _$ResponseDataFromJson(Map<String, dynamic> json) {

@@ -1,10 +1,15 @@
 import 'package:codeforces_visualizer/screens/tabs_screen.dart';
 import 'package:flutter/material.dart';
 
-class UserAuthScreen extends StatelessWidget {
+class UserAuthScreen extends StatefulWidget {
   static const routeName = '/userauth-screen';
   const UserAuthScreen({Key? key}) : super(key: key);
 
+  @override
+  State<UserAuthScreen> createState() => _UserAuthScreenState();
+}
+
+class _UserAuthScreenState extends State<UserAuthScreen> {
   @override
   Widget build(BuildContext context) {
     var userIdTextController = TextEditingController();

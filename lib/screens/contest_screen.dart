@@ -36,7 +36,8 @@ class ContestScreen extends StatelessWidget {
     );
   }
 
-  FutureBuilder<ResponseData> _buildBody(BuildContext context) {
+  FutureBuilder<ResponseData> _buildBody(
+      BuildContext context, String userName) {
     var _mediaQuery = MediaQuery.of(context);
     final client = ApiClient(Dio(BaseOptions(contentType: "application/json")));
     return FutureBuilder<ResponseData>(
