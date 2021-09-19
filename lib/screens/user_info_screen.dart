@@ -31,7 +31,7 @@ FutureBuilder<ProblemResponseData> _buildBody(BuildContext context) {
       if (snapshot.connectionState == ConnectionState.done) {
         final ProblemResponseData? posts = snapshot.data;
         print(posts!.result.length);
-        print(posts.result[0]['programmingLanguage']);
+        print(posts!.result[0]['problem']['rating']);
         return _buildCharts(posts);
       } else {
         return const Center(
@@ -51,10 +51,14 @@ class _buildCharts extends StatelessWidget {
     List<accepted_problem.Problem> problemData = [];
     for (int i = 0; i < posts!.result.length; i++) {
       if (posts!.result[i]['verdict'] == 'OK') {
+        List<String> problemTags = [];
+        for (int j = 0; j < posts!.result[i]['problem']['tags'].length; j++) {
+          problemTags.add(posts!.result[i]['problem']['tags'][j]);
+        }
         problemData.add(accepted_problem.Problem(
             programmingLanguage: posts!.result[i]['programmingLanguage'],
             rating: posts!.result[i]['problem']['rating'],
-            tags: posts!.result[i]['problem']['tags'] as List<String>,
+            tags: problemTags,
             verdict: posts!.result[i]['verdict']));
       }
     }

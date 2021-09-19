@@ -1,17 +1,16 @@
+import 'package:codeforces_visualizer/repository/api_model/problem.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'problem_data.g.dart';
 
 @JsonSerializable()
 class Problem {
-  final int rating;
-  final List<String> tags;
+  final IndProblem indProblem;
   final String programmingLanguage;
   final String verdict;
 
   Problem({
+    required this.indProblem,
     required this.programmingLanguage,
-    required this.rating,
-    required this.tags,
     required this.verdict,
   });
 
