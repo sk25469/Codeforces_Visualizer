@@ -68,6 +68,7 @@ class _buildCharts extends StatelessWidget {
         ProblemData(problemData).getProblemDetailsByTags();
 
     ratingData.sort((a, b) => a.compareTo(b));
+
     var barChart = charts.BarChart(
       ProblemRatingSeries(ratingData).getSeries(),
       animate: true,
@@ -109,7 +110,7 @@ class _buildCharts extends StatelessWidget {
             ),
           ),
         ),
-        PieChart(pieChart),
+        PieChart(pieChart, tagData),
       ],
     );
   }

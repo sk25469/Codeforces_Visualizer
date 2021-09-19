@@ -1,3 +1,4 @@
+import 'package:codeforces_visualizer/models/problem_detail_by_tags.dart';
 import 'package:codeforces_visualizer/models/tags.dart';
 import 'package:flutter/material.dart';
 
@@ -5,8 +6,9 @@ import '../tag_colors.dart';
 
 class PieChart extends StatelessWidget {
   final Widget chartType;
+  final List<ProblemDetailByTags> tagData;
 
-  PieChart(this.chartType);
+  PieChart(this.chartType, this.tagData);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class PieChart extends StatelessWidget {
             children: <Widget>[
               Positioned(
                 top: 5.0,
-                right: 5.0,
+                right: 3.0,
                 child: Container(
                   height: 190,
                   width: 200,
@@ -41,7 +43,7 @@ class PieChart extends StatelessWidget {
                     left: 10.0,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: legendsList(),
+                      children: legendsList(tagData),
                     ),
                   ),
                 ),
@@ -62,7 +64,7 @@ class PieChart extends StatelessWidget {
   }
 }
 
-List<Widget> legendsList() {
+List<Widget> legendsList(List<ProblemDetailByTags> tagData) {
   List<Tag> tagColor = [];
   TagColors.colors.forEach((tag, color) {
     tagColor.add(Tag(color, tag));
@@ -81,6 +83,11 @@ List<Widget> legendsList() {
           ),
           Container(width: 5.0),
           Text(value.tag),
+          // Container(width: 5.0),
+          // Text(tagData
+          //     .firstWhere((element) => value.tag == element.tag)
+          //     .quesCnt
+          //     .toString()),
         ],
       );
     },
