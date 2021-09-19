@@ -32,13 +32,18 @@ class PieChart extends StatelessWidget {
                   child: chartType,
                 ),
               ),
-              Positioned(
-                top: 20,
-                bottom: 20.0,
-                left: 10.0,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: legendsList(),
+              SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Positioned(
+                    top: 20,
+                    bottom: 20.0,
+                    left: 10.0,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: legendsList(),
+                    ),
+                  ),
                 ),
               ),
               const Positioned(

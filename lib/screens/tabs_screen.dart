@@ -13,11 +13,11 @@ class _TabsScreenState extends State<TabsScreen> {
   final List<Map<String, Object>> _pages = [
     {
       'page': const ContestScreen(),
-      'title': 'Categories',
+      'title': 'Upcoming Contests',
     },
     {
       'page': const UserInfoScreen(),
-      'title': 'Your Favorite',
+      'title': 'My Stats',
     },
   ];
   int _selectedPageIndex = 0;

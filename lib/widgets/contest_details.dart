@@ -10,6 +10,7 @@ class ContestDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var mediaQuery = MediaQuery.of(context).size.width;
     return ListView.builder(
       itemBuilder: (context, index) {
         return Padding(
@@ -28,63 +29,91 @@ class ContestDetail extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Column(
-                      // ignore: prefer_const_literals_to_create_immutables
-                      children: [
-                        const Text(
-                          'Start Time',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
+                    // contest start time
+                    Container(
+                      width: mediaQuery * 0.15,
+                      child: Column(
+                        // ignore: prefer_const_literals_to_create_immutables
+                        children: [
+                          const Text(
+                            'Start Time',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 3.5),
-                        Text(
-                          DateTime.fromMillisecondsSinceEpoch(
-                                      upcomingContest[index].startTime * 1000)
-                                  .month
-                                  .toString() +
-                              " " +
-                              DateTime.fromMillisecondsSinceEpoch(
-                                      upcomingContest[index].startTime * 1000)
-                                  .day
-                                  .toString(),
-                        ),
-                      ],
+                          const SizedBox(height: 3.5),
+                          Text(
+                            DateTime.fromMillisecondsSinceEpoch(
+                                        upcomingContest[index].startTime * 1000)
+                                    .day
+                                    .toString() +
+                                "/" +
+                                DateTime.fromMillisecondsSinceEpoch(
+                                        upcomingContest[index].startTime * 1000)
+                                    .month
+                                    .toString() +
+                                "\n" +
+                                DateTime.fromMillisecondsSinceEpoch(
+                                        upcomingContest[index].startTime * 1000)
+                                    .hour
+                                    .toString() +
+                                ":" +
+                                DateTime.fromMillisecondsSinceEpoch(
+                                        upcomingContest[index].startTime * 1000)
+                                    .minute
+                                    .toString(),
+                          ),
+                        ],
+                      ),
                     ),
-                    Column(
-                      // ignore: prefer_const_literals_to_create_immutables
-                      children: [
-                        const Text(
-                          'Contest Name',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
-                          ),
-                        ),
-                        const SizedBox(height: 3.5),
-                        Text(upcomingContest[index].contestName),
-                      ],
+
+                    const Divider(
+                      thickness: 5,
                     ),
-                    Column(
-                      // ignore: prefer_const_literals_to_create_immutables
-                      children: [
-                        const Text(
-                          'Duration',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
+
+                    Container(
+                      width: mediaQuery * 0.55,
+                      child: Column(
+                        // ignore: prefer_const_literals_to_create_immutables
+                        children: [
+                          const Text(
+                            'Contest Name',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 3.5),
-                        Text(
-                          (upcomingContest[index].duration ~/ (60 * 60))
-                                  .toString() +
-                              " : " +
-                              ((upcomingContest[index].duration / 60) % 60)
-                                  .toString(),
-                        ),
-                      ],
+                          const SizedBox(height: 3.5),
+                          Text(
+                            upcomingContest[index].contestName,
+                            maxLines: 2,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      width: mediaQuery * 0.2,
+                      child: Column(
+                        // ignore: prefer_const_literals_to_create_immutables
+                        children: [
+                          const Text(
+                            'Duration\n   (min)',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
+                          ),
+                          const SizedBox(height: 3.5),
+                          Text(
+                            // (upcomingContest[index].duration ~/ (60 * 60))
+                            //         .toString() +
+                            //     " : " +
+                            ((upcomingContest[index].duration ~/ 60))
+                                .toString(),
+                          ),
+                        ],
+                      ),
                     )
                   ],
                 ),

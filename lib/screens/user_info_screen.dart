@@ -30,8 +30,8 @@ FutureBuilder<ProblemResponseData> _buildBody(BuildContext context) {
     builder: (context, snapshot) {
       if (snapshot.connectionState == ConnectionState.done) {
         final ProblemResponseData? posts = snapshot.data;
-        print(posts!.result.length);
-        print(posts!.result[0]['problem']['rating']);
+        // print(posts!.result.length);
+        // print(posts!.result[0]['problem']['rating']);
         return _buildCharts(posts);
       } else {
         return const Center(
@@ -67,6 +67,7 @@ class _buildCharts extends StatelessWidget {
     List<ProblemDetailByTags> tagData =
         ProblemData(problemData).getProblemDetailsByTags();
 
+    ratingData.sort((a, b) => a.compareTo(b));
     var barChart = charts.BarChart(
       ProblemRatingSeries(ratingData).getSeries(),
       animate: true,
@@ -94,6 +95,7 @@ class _buildCharts extends StatelessWidget {
             padding: const EdgeInsets.all(5.0),
             child: SizedBox(
               height: 200.0,
+              width: double.maxFinite,
               child: barChart,
             ),
           ),
