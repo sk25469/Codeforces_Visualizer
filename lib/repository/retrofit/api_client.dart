@@ -7,7 +7,6 @@ part 'api_client.g.dart';
 
 @RestApi(baseUrl: "https://codeforces.com/api/")
 abstract class ApiClient {
-  // static const String userName = "";
   factory ApiClient(Dio dio, {String baseUrl}) = _ApiClient;
 
   @GET(Apis.contests)

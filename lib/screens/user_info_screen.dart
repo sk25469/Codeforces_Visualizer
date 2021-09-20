@@ -42,32 +42,41 @@ FutureBuilder<ProblemResponseData> _buildBody(BuildContext context) {
   );
 }
 
+List<accepted_problem.Problem> _getACProblems(ProblemResponseData? posts) {
+  List<accepted_problem.Problem> problemData = [];
+  for (int i = 0; i < posts!.result.length; i++) {
+    if (posts!.result[i]['verdict'] == 'OK') {
+      List<String> problemTags = [];
+      for (int j = 0; j < posts.result[i]['problem']['tags'].length; j++) {
+        problemTags.add(posts.result[i]['problem']['tags'][j]);
+      }
+      problemData.add(accepted_problem.Problem(
+          programmingLanguage: posts!.result[i]['programmingLanguage'],
+          rating: posts.result[i]['problem']['rating'],
+          tags: problemTags,
+          verdict: posts.result[i]['verdict']));
+    }
+  }
+
+  return problemData;
+}
+
 class _buildCharts extends StatelessWidget {
   final ProblemResponseData? posts;
   _buildCharts(this.posts);
 
   @override
   Widget build(BuildContext context) {
-    List<accepted_problem.Problem> problemData = [];
-    for (int i = 0; i < posts!.result.length; i++) {
-      if (posts!.result[i]['verdict'] == 'OK') {
-        List<String> problemTags = [];
-        for (int j = 0; j < posts!.result[i]['problem']['tags'].length; j++) {
-          problemTags.add(posts!.result[i]['problem']['tags'][j]);
-        }
-        problemData.add(accepted_problem.Problem(
-            programmingLanguage: posts!.result[i]['programmingLanguage'],
-            rating: posts!.result[i]['problem']['rating'],
-            tags: problemTags,
-            verdict: posts!.result[i]['verdict']));
-      }
-    }
+    List<accepted_problem.Problem> problemData = _getACProblems(posts);
+
     List<ProblemDetailByRating> ratingData =
         ProblemData(problemData).getProblemDetailsByRating();
     List<ProblemDetailByTags> tagData =
         ProblemData(problemData).getProblemDetailsByTags();
 
     ratingData.sort((a, b) => a.compareTo(b));
+
+    tagData.sort((a, b) => a.compareTo(b));
 
     var barChart = charts.BarChart(
       ProblemRatingSeries(ratingData).getSeries(),
@@ -78,6 +87,7 @@ class _buildCharts extends StatelessWidget {
       ProblemTopicSeries(tagData).getSeries(),
       animate: true,
     );
+
     return Column(
       children: [
         const Padding(

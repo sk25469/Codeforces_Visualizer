@@ -34,13 +34,13 @@ class PieChart extends StatelessWidget {
                   child: chartType,
                 ),
               ),
-              SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Positioned(
-                    top: 20,
-                    bottom: 20.0,
-                    left: 10.0,
+              Positioned(
+                top: 10,
+                bottom: 10.0,
+                left: 10.0,
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(1.5),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: legendsList(tagData),
@@ -66,9 +66,15 @@ class PieChart extends StatelessWidget {
 
 List<Widget> legendsList(List<ProblemDetailByTags> tagData) {
   List<Tag> tagColor = [];
-  TagColors.colors.forEach((tag, color) {
-    tagColor.add(Tag(color, tag));
-  });
+  TagColors.colors.forEach(
+    (tag, color) {
+      tagColor.add(Tag(color, tag));
+    },
+  );
+  for (int i = 0; i < tagData.length; i++) {
+    print(
+        'Tag name ${tagData[i].tag} \n No. of questions : ${tagData[i].quesCnt}');
+  }
   return tagColor.map(
     (value) {
       return Row(
@@ -83,11 +89,13 @@ List<Widget> legendsList(List<ProblemDetailByTags> tagData) {
           ),
           Container(width: 5.0),
           Text(value.tag),
-          // Container(width: 5.0),
-          // Text(tagData
-          //     .firstWhere((element) => value.tag == element.tag)
-          //     .quesCnt
-          //     .toString()),
+          Container(width: 5.0),
+          Text(tagData.indexWhere((element) => element.tag == value.tag) != -1
+              ? tagData[
+                      tagData.indexWhere((element) => element.tag == value.tag)]
+                  .quesCnt
+                  .toString()
+              : "0")
         ],
       );
     },
