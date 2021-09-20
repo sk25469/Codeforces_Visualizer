@@ -85,7 +85,9 @@ class _buildListView extends StatelessWidget {
         );
       }
     }
+
     _upcomingContests.sort((a, b) => a.compareTo(b));
+
     return Container(
       height: (mediaQuery.size.height -
               mediaQuery.padding.top -
