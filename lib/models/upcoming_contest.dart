@@ -1,3 +1,5 @@
+import 'package:http/http.dart' as http;
+
 class UpcomingContest implements Comparable {
   final String contestName;
   final int startTime;
@@ -14,7 +16,6 @@ class UpcomingContest implements Comparable {
     if (startTime < other.startTime) {
       return 0;
     }
-
     return 1;
   }
 }

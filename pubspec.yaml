@@ -43,6 +43,7 @@ dependencies:
   retrofit_generator: ^2.0.1
   json_serializable: ^4.1.4
   built_value_generator: ^8.1.1
+  http: ^0.13.3
 
 dev_dependencies:
   flutter_test:
