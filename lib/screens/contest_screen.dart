@@ -36,19 +36,15 @@ class ContestScreen extends StatelessWidget {
     );
   }
 
-  FutureBuilder<ResponseData> _buildBody(BuildContext context) {
+  FutureBuilder<void> _buildBody(BuildContext context) {
     var _mediaQuery = MediaQuery.of(context);
-    final client = ApiClient(Dio(BaseOptions(contentType: "application/json")));
-    return FutureBuilder<ResponseData>(
-      future: client.getContests(),
+    return FutureBuilder<void>(
+      future: Contests().fetchAndGetContests(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          final ResponseData? posts = snapshot.data;
-          // print(posts!.result.length);
-          // print(posts!.result[0]['name']);
+          print(Contests().contests.length);
           return _buildListView(
             mediaQuery: _mediaQuery,
-            posts: posts,
           );
         } else {
           return const Center(
@@ -62,25 +58,26 @@ class ContestScreen extends StatelessWidget {
 
 // ignore: camel_case_types
 class _buildListView extends StatelessWidget {
-  const _buildListView({
+  _buildListView({
     Key? key,
     required this.mediaQuery,
-    required this.posts,
   }) : super(key: key);
 
   final MediaQueryData mediaQuery;
-  final ResponseData? posts;
+  final List<UpcomingContest> contests = Contests().contests;
 
   @override
   Widget build(BuildContext context) {
     final List<UpcomingContest> _upcomingContests = [];
-    for (int i = 0; i < posts!.result.length; i++) {
-      if (posts!.result[i]["phase"] == "BEFORE") {
+    // print(contests.length);
+    for (int i = 0; i < contests.length; i++) {
+      if (contests[i].phase == "BEFORE") {
         _upcomingContests.add(
           UpcomingContest(
-            duration: posts!.result[i]["durationSeconds"],
-            contestName: posts!.result[i]['name'],
-            startTime: posts!.result[i]["startTimeSeconds"],
+            duration: contests[i].duration,
+            contestName: contests[i].contestName,
+            startTime: contests[i].startTime,
+            phase: contests[i].phase,
           ),
         );
       }
