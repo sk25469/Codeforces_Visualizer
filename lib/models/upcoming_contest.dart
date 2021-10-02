@@ -24,25 +24,20 @@ class UpcomingContest implements Comparable {
 }
 
 class Contests {
-  List<UpcomingContest> _upcomingContests = [];
+  // List<UpcomingContest> upcomingContests = [];
 
-  List<UpcomingContest> get contests {
-    print(_upcomingContests.length);
-    return [..._upcomingContests];
-  }
-
-  Future<void> fetchAndGetContests() async {
+  Future<List<UpcomingContest>> fetchAndGetContests() async {
     var uri = Uri.parse('https://codeforces.com/api/contest.list');
     try {
       final response = await http.get(uri);
-      // final List<UpcomingContest> loadedContests = [];
+      final List<UpcomingContest> loadedContests = [];
 
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       // print(extractedData['result']);
       final allContests = extractedData['result'] as List<dynamic>;
 
       for (int i = 0; i < allContests.length; i++) {
-        _upcomingContests.add(
+        loadedContests.add(
           UpcomingContest(
             contestName: allContests[i]['name'],
             duration: allContests[i]['durationSeconds'],
@@ -52,8 +47,10 @@ class Contests {
         );
       }
 
-      // _upcomingContests = loadedContests;
-      print(_upcomingContests[0].contestName);
+      // upcomingContests = loadedContests;
+      // print(upcomingContests[0].contestName);
+
+      return loadedContests;
     } catch (error) {
       rethrow;
     }

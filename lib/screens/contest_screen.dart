@@ -1,8 +1,7 @@
 import 'package:codeforces_visualizer/models/upcoming_contest.dart';
-import 'package:codeforces_visualizer/repository/api_model/data.dart';
-import 'package:codeforces_visualizer/repository/retrofit/api_client.dart';
+
 import 'package:codeforces_visualizer/widgets/contest_details.dart';
-import 'package:dio/dio.dart';
+
 import 'package:flutter/material.dart';
 
 class ContestScreen extends StatelessWidget {
@@ -36,15 +35,16 @@ class ContestScreen extends StatelessWidget {
     );
   }
 
-  FutureBuilder<void> _buildBody(BuildContext context) {
+  FutureBuilder<List<UpcomingContest>> _buildBody(BuildContext context) {
     var _mediaQuery = MediaQuery.of(context);
-    return FutureBuilder<void>(
+    return FutureBuilder<List<UpcomingContest>>(
       future: Contests().fetchAndGetContests(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          print(Contests().contests.length);
+          final upcomingContests = snapshot.data;
           return _buildListView(
             mediaQuery: _mediaQuery,
+            contests: upcomingContests,
           );
         } else {
           return const Center(
@@ -61,23 +61,24 @@ class _buildListView extends StatelessWidget {
   _buildListView({
     Key? key,
     required this.mediaQuery,
+    required this.contests,
   }) : super(key: key);
 
   final MediaQueryData mediaQuery;
-  final List<UpcomingContest> contests = Contests().contests;
+  final List<UpcomingContest>? contests;
 
   @override
   Widget build(BuildContext context) {
     final List<UpcomingContest> _upcomingContests = [];
     // print(contests.length);
-    for (int i = 0; i < contests.length; i++) {
-      if (contests[i].phase == "BEFORE") {
+    for (int i = 0; i < contests!.length; i++) {
+      if (contests![i].phase == "BEFORE") {
         _upcomingContests.add(
           UpcomingContest(
-            duration: contests[i].duration,
-            contestName: contests[i].contestName,
-            startTime: contests[i].startTime,
-            phase: contests[i].phase,
+            duration: contests![i].duration,
+            contestName: contests![i].contestName,
+            startTime: contests![i].startTime,
+            phase: contests![i].phase,
           ),
         );
       }
