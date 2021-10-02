@@ -1,4 +1,5 @@
 import 'package:codeforces_visualizer/screens/tabs_screen.dart';
+import 'package:codeforces_visualizer/user.dart';
 import 'package:flutter/material.dart';
 
 class UserAuthScreen extends StatefulWidget {
@@ -16,7 +17,8 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
     void _submitData() {
       if (userIdTextController.text.toString().isNotEmpty) {
         Navigator.of(context).pushNamed(TabsScreen.routeName);
-        // print(userIdTextController.text.toString());
+        String userName = userIdTextController.text.toString();
+        User().setUserName(userName);
       } else {
         _showToast(context);
       }
@@ -61,8 +63,7 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
     scaffold.showSnackBar(
       SnackBar(
         content: const Text('Please enter a valid username'),
-        action: SnackBarAction(
-            label: 'UNDO', onPressed: scaffold.hideCurrentSnackBar),
+        action: SnackBarAction(label: 'UNDO', onPressed: scaffold.hideCurrentSnackBar),
       ),
     );
   }

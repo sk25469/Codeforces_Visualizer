@@ -24,8 +24,6 @@ class UpcomingContest implements Comparable {
 }
 
 class Contests {
-  // List<UpcomingContest> upcomingContests = [];
-
   Future<List<UpcomingContest>> fetchAndGetContests() async {
     var uri = Uri.parse('https://codeforces.com/api/contest.list');
     try {
@@ -46,9 +44,6 @@ class Contests {
           ),
         );
       }
-
-      // upcomingContests = loadedContests;
-      // print(upcomingContests[0].contestName);
 
       return loadedContests;
     } catch (error) {
