@@ -20,7 +20,7 @@ class Problems {
   Problems(this._userName);
 
   Future<List<Problem>> fetchProblems() async {
-    var uri = Uri.parse('https://codeforces.com/api/user.status?handle=$_userName');
+    var uri = Uri.parse('https://codeforces.com/api/user.status?handle=' + _userName);
 
     try {
       final response = await http.get(uri);
@@ -49,8 +49,11 @@ class Problems {
         );
       }
 
+      print(solvedProblems[0].rating);
+
       return solvedProblems;
     } catch (error) {
+      print(error.toString());
       rethrow;
     }
   }

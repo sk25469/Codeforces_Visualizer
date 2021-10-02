@@ -27,8 +27,7 @@ FutureBuilder<List<Problem>> _buildBody(BuildContext context, String userName) {
     builder: (context, snapshot) {
       if (snapshot.connectionState == ConnectionState.done) {
         final List<Problem>? posts = snapshot.data;
-        // print(posts!.result.length);
-        // print(posts!.result[0]['problem']['rating']);
+        // print("No. of problems are " + posts!.length.toString());
         return _buildCharts(posts);
       } else {
         return const Center(
