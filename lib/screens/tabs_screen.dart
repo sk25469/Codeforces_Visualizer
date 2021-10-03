@@ -20,13 +20,14 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final String _usrName = ModalRoute.of(context)!.settings.arguments as String;
     final List<Map<String, Object>> _pages = [
       {
         'page': const ContestScreen(),
         'title': 'Upcoming Contests',
       },
       {
-        'page': UserInfoScreen(),
+        'page': UserInfoScreen(_usrName),
         'title': 'My Stats',
       },
     ];

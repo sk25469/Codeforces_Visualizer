@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'CF Visualizer',
       routes: {
         '/': (context) => const UserAuthScreen(),
-        UserInfoScreen.routeName: (context) => UserInfoScreen(),
+        // UserInfoScreen.routeName: (context) => UserInfoScreen(),
         TabsScreen.routeName: (context) => TabsScreen(),
         ContestScreen.routeName: (context) => const ContestScreen(),
       },

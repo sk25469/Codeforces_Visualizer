@@ -17,12 +17,14 @@ class Problem {
 
 class Problems {
   final String _userName;
+
   Problems(this._userName);
 
   Future<List<Problem>> fetchProblems() async {
     var uri = Uri.parse('https://codeforces.com/api/user.status?handle=' + _userName);
 
     try {
+      print(_userName);
       final response = await http.get(uri);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
 
@@ -36,17 +38,26 @@ class Problems {
 
         var problemData = allProblems[i]['problem'] as Map<String, dynamic>;
 
-        int rating = problemData['rating'];
-        List<String> tags = problemData['tags'];
+        int rating = problemData['rating'] ?? 0;
+        List<dynamic> tagsList = problemData['tags'];
+        List<String> tags = [];
 
-        solvedProblems.add(
-          Problem(
-            programmingLanguage: programmingLang,
-            rating: rating,
-            tags: tags,
-            verdict: verdict,
-          ),
-        );
+        for (int i = 0; i < tagsList.length; i++) {
+          tags.add(tagsList[i] as String);
+        }
+
+        print("rating is " + rating.toString() + " verdict is " + verdict);
+
+        if (verdict == "OK") {
+          solvedProblems.add(
+            Problem(
+              programmingLanguage: programmingLang,
+              rating: rating,
+              tags: tags,
+              verdict: verdict,
+            ),
+          );
+        }
       }
 
       print(solvedProblems[0].rating);

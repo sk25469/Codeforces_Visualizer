@@ -1,6 +1,6 @@
 import 'package:codeforces_visualizer/screens/tabs_screen.dart';
-import 'package:codeforces_visualizer/user.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserAuthScreen extends StatefulWidget {
   static const routeName = '/userauth-screen';
@@ -16,9 +16,11 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
     var userIdTextController = TextEditingController();
     void _submitData() {
       if (userIdTextController.text.toString().isNotEmpty) {
-        Navigator.of(context).pushNamed(TabsScreen.routeName);
-        String userName = userIdTextController.text.toString();
-        User().setUserName(userName);
+        String usrName = userIdTextController.text.toString();
+        Navigator.of(context).pushNamed(
+          TabsScreen.routeName,
+          arguments: usrName,
+        );
       } else {
         _showToast(context);
       }
