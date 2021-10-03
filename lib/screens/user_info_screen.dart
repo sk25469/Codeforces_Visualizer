@@ -26,7 +26,20 @@ FutureBuilder<List<Problem>> _buildBody(BuildContext context, String userName) {
   return FutureBuilder<List<Problem>>(
     future: Problems(userName).fetchProblems(),
     builder: (context, snapshot) {
-      if (snapshot.connectionState == ConnectionState.done) {
+      if (snapshot.hasError) {
+        return AlertDialog(
+          title: const Text('An error occurred'),
+          content: const Text('Username not valid'),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('OK'),
+            )
+          ],
+        );
+      } else if (snapshot.connectionState == ConnectionState.done) {
         final List<Problem>? posts = snapshot.data;
         // print("No. of problems are " + posts!.length.toString());
         return _buildCharts(posts, userName);
