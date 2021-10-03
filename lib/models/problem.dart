@@ -46,7 +46,7 @@ class Problems {
           tags.add(tagsList[i] as String);
         }
 
-        print("rating is " + rating.toString() + " verdict is " + verdict);
+        // print("rating is " + rating.toString() + " verdict is " + verdict);
 
         if (verdict == "OK") {
           solvedProblems.add(
@@ -60,7 +60,7 @@ class Problems {
         }
       }
 
-      print(solvedProblems[0].rating);
+      // print(solvedProblems[0].rating);
 
       return solvedProblems;
     } catch (error) {

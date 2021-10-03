@@ -7,7 +7,6 @@ import 'package:codeforces_visualizer/widgets/pie_chart.dart';
 import 'package:flutter/material.dart';
 
 import 'package:codeforces_visualizer/models/problem_detail_by_rating.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../problem_data.dart';
 
