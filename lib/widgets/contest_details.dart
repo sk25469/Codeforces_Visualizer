@@ -38,9 +38,9 @@ class ContestDetail extends StatelessWidget {
                           const Text(
                             'Start Time',
                             style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            ),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                                overflow: TextOverflow.clip),
                           ),
                           const SizedBox(height: 3.5),
                           Text(
@@ -109,8 +109,7 @@ class ContestDetail extends StatelessWidget {
                             // (upcomingContest[index].duration ~/ (60 * 60))
                             //         .toString() +
                             //     " : " +
-                            ((upcomingContest[index].duration ~/ 60))
-                                .toString(),
+                            ((upcomingContest[index].duration ~/ 60)).toString(),
                           ),
                         ],
                       ),

@@ -10,16 +10,6 @@ class TabsScreen extends StatefulWidget {
 }
 
 class _TabsScreenState extends State<TabsScreen> {
-  final List<Map<String, Object>> _pages = [
-    {
-      'page': const ContestScreen(),
-      'title': 'Upcoming Contests',
-    },
-    {
-      'page': const UserInfoScreen(),
-      'title': 'My Stats',
-    },
-  ];
   int _selectedPageIndex = 0;
 
   void _selectPage(int index) {
@@ -30,6 +20,18 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final String _usrName = ModalRoute.of(context)!.settings.arguments as String;
+    final List<Map<String, Object>> _pages = [
+      {
+        'page': const ContestScreen(),
+        'title': 'Upcoming Contests',
+      },
+      {
+        'page': UserInfoScreen(_usrName),
+        'title': 'My Stats',
+      },
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: Text(_pages[_selectedPageIndex]['title'] as String),

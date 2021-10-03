@@ -1,8 +1,7 @@
 import 'package:codeforces_visualizer/models/upcoming_contest.dart';
-import 'package:codeforces_visualizer/repository/api_model/data.dart';
-import 'package:codeforces_visualizer/repository/retrofit/api_client.dart';
+
 import 'package:codeforces_visualizer/widgets/contest_details.dart';
-import 'package:dio/dio.dart';
+
 import 'package:flutter/material.dart';
 
 class ContestScreen extends StatelessWidget {
@@ -36,19 +35,16 @@ class ContestScreen extends StatelessWidget {
     );
   }
 
-  FutureBuilder<ResponseData> _buildBody(BuildContext context) {
+  FutureBuilder<List<UpcomingContest>> _buildBody(BuildContext context) {
     var _mediaQuery = MediaQuery.of(context);
-    final client = ApiClient(Dio(BaseOptions(contentType: "application/json")));
-    return FutureBuilder<ResponseData>(
-      future: client.getContests(),
+    return FutureBuilder<List<UpcomingContest>>(
+      future: Contests().fetchAndGetContests(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          final ResponseData? posts = snapshot.data;
-          // print(posts!.result.length);
-          // print(posts!.result[0]['name']);
+          final upcomingContests = snapshot.data;
           return _buildListView(
             mediaQuery: _mediaQuery,
-            posts: posts,
+            contests: upcomingContests,
           );
         } else {
           return const Center(
@@ -62,25 +58,27 @@ class ContestScreen extends StatelessWidget {
 
 // ignore: camel_case_types
 class _buildListView extends StatelessWidget {
-  const _buildListView({
+  _buildListView({
     Key? key,
     required this.mediaQuery,
-    required this.posts,
+    required this.contests,
   }) : super(key: key);
 
   final MediaQueryData mediaQuery;
-  final ResponseData? posts;
+  final List<UpcomingContest>? contests;
 
   @override
   Widget build(BuildContext context) {
     final List<UpcomingContest> _upcomingContests = [];
-    for (int i = 0; i < posts!.result.length; i++) {
-      if (posts!.result[i]["phase"] == "BEFORE") {
+    // print(contests.length);
+    for (int i = 0; i < contests!.length; i++) {
+      if (contests![i].phase == "BEFORE") {
         _upcomingContests.add(
           UpcomingContest(
-            duration: posts!.result[i]["durationSeconds"],
-            contestName: posts!.result[i]['name'],
-            startTime: posts!.result[i]["startTimeSeconds"],
+            duration: contests![i].duration,
+            contestName: contests![i].contestName,
+            startTime: contests![i].startTime,
+            phase: contests![i].phase,
           ),
         );
       }
