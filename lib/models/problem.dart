@@ -1,3 +1,4 @@
+import 'package:codeforces_visualizer/models/unknown_handle_error.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -24,9 +25,14 @@ class Problems {
     var uri = Uri.parse('https://codeforces.com/api/user.status?handle=' + _userName);
 
     try {
-      print(_userName);
+      // print(_userName);
       final response = await http.get(uri);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      String status = extractedData['status'];
+
+      if (status == "FAILED") {
+        throw UnknownHandleException('Username not valid');
+      }
 
       final allProblems = extractedData['result'] as List<dynamic>;
 
