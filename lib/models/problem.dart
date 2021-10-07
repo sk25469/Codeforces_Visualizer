@@ -1,6 +1,8 @@
-import 'package:codeforces_visualizer/models/unknown_handle_error.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+
+import 'package:codeforces_visualizer/models/unknown_handle_error.dart';
 
 class Problem {
   Problem({

@@ -22,6 +22,7 @@ class UserInfoScreen extends StatelessWidget {
   }
 }
 
+/// This returns a list of [Problem] which has a status of "OK"
 FutureBuilder<List<Problem>> _buildBody(BuildContext context, String userName) {
   return FutureBuilder<List<Problem>>(
     future: Problems(userName).fetchProblems(),

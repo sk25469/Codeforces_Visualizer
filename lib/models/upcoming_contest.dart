@@ -1,6 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+/// This class represents the upcoming contests
 class UpcomingContest implements Comparable {
   final String contestName;
   final int startTime;
