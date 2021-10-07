@@ -53,6 +53,9 @@ FutureBuilder<List<Problem>> _buildBody(BuildContext context, String userName) {
   );
 }
 
+/// This takes the series of the data to be represented
+/// takes the userName and the list of problems
+// ignore: camel_case_types
 class _buildCharts extends StatelessWidget {
   final List<Problem>? posts;
   final String userName;
