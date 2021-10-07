@@ -1,6 +1,7 @@
 import 'package:codeforces_visualizer/models/upcoming_contest.dart';
 import 'package:flutter/material.dart';
 
+/// takes the [UpcomingContest] and displays the contents
 class ContestDetail extends StatelessWidget {
   final List<UpcomingContest> upcomingContest;
 
