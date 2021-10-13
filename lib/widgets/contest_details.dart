@@ -1,13 +1,49 @@
-import 'package:codeforces_visualizer/models/upcoming_contest.dart';
+import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:flutter/material.dart';
 
+import 'package:codeforces_visualizer/models/upcoming_contest.dart';
+
 /// takes the [UpcomingContest] and displays the contents
-class ContestDetail extends StatelessWidget {
+class ContestDetail extends StatefulWidget {
   final List<UpcomingContest> upcomingContest;
 
   ContestDetail({
     required this.upcomingContest,
   });
+
+  @override
+  State<ContestDetail> createState() => _ContestDetailState();
+}
+
+class _ContestDetailState extends State<ContestDetail> {
+  Map<int, bool> isAdded = {};
+  void _addToCalender(int index, List<UpcomingContest> upcomingContest) {
+    int eventStartTime = upcomingContest[index].startTime;
+    // int eventDuration = upcomingContest[index].duration;
+    var evaluatedDate = DateTime.fromMillisecondsSinceEpoch(eventStartTime * 1000);
+    var year = evaluatedDate.year;
+    var month = evaluatedDate.month;
+    var day = evaluatedDate.day;
+    var hour = evaluatedDate.hour;
+    var min = evaluatedDate.minute;
+    final Event event = Event(
+      title: upcomingContest[index].contestName,
+      description: 'Codeforces Round',
+      location: 'Online',
+      startDate: DateTime(year, month, day, hour, min).subtract(
+        const Duration(minutes: 30),
+      ),
+      endDate: DateTime(year, month, day, hour, min).add(
+        const Duration(hours: 3),
+      ),
+    );
+    setState(() {
+      Add2Calendar.addEvent2Cal(event);
+      if (isAdded[index] == null) {
+        isAdded[index] = true;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,22 +82,22 @@ class ContestDetail extends StatelessWidget {
                           const SizedBox(height: 3.5),
                           Text(
                             DateTime.fromMillisecondsSinceEpoch(
-                                        upcomingContest[index].startTime * 1000)
+                                        widget.upcomingContest[index].startTime * 1000)
                                     .day
                                     .toString() +
                                 "/" +
                                 DateTime.fromMillisecondsSinceEpoch(
-                                        upcomingContest[index].startTime * 1000)
+                                        widget.upcomingContest[index].startTime * 1000)
                                     .month
                                     .toString() +
                                 "\n" +
                                 DateTime.fromMillisecondsSinceEpoch(
-                                        upcomingContest[index].startTime * 1000)
+                                        widget.upcomingContest[index].startTime * 1000)
                                     .hour
                                     .toString() +
                                 ":" +
                                 DateTime.fromMillisecondsSinceEpoch(
-                                        upcomingContest[index].startTime * 1000)
+                                        widget.upcomingContest[index].startTime * 1000)
                                     .minute
                                     .toString(),
                           ),
@@ -69,12 +105,8 @@ class ContestDetail extends StatelessWidget {
                       ),
                     ),
 
-                    const Divider(
-                      thickness: 5,
-                    ),
-
                     Container(
-                      width: mediaQuery * 0.55,
+                      width: mediaQuery * 0.45,
                       child: Column(
                         // ignore: prefer_const_literals_to_create_immutables
                         children: [
@@ -87,14 +119,14 @@ class ContestDetail extends StatelessWidget {
                           ),
                           const SizedBox(height: 3.5),
                           Text(
-                            upcomingContest[index].contestName,
+                            widget.upcomingContest[index].contestName,
                             maxLines: 2,
                           ),
                         ],
                       ),
                     ),
                     Container(
-                      width: mediaQuery * 0.2,
+                      width: mediaQuery * 0.18,
                       child: Column(
                         // ignore: prefer_const_literals_to_create_immutables
                         children: [
@@ -110,9 +142,23 @@ class ContestDetail extends StatelessWidget {
                             // (upcomingContest[index].duration ~/ (60 * 60))
                             //         .toString() +
                             //     " : " +
-                            ((upcomingContest[index].duration ~/ 60)).toString(),
+                            ((widget.upcomingContest[index].duration ~/ 60)).toString(),
                           ),
                         ],
+                      ),
+                    ),
+
+                    Container(
+                      width: mediaQuery * 0.12,
+                      child: IconButton(
+                        onPressed: isAdded[index] != null
+                            ? null
+                            : () {
+                                _addToCalender(index, widget.upcomingContest);
+                              },
+                        icon: isAdded[index] != null
+                            ? const Icon(Icons.notifications_active)
+                            : const Icon(Icons.notification_add),
                       ),
                     )
                   ],
@@ -122,7 +168,7 @@ class ContestDetail extends StatelessWidget {
           ),
         );
       },
-      itemCount: upcomingContest.length,
+      itemCount: widget.upcomingContest.length,
     );
   }
 }

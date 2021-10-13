@@ -1,6 +1,5 @@
 import 'package:codeforces_visualizer/screens/contest_screen.dart';
 import 'package:codeforces_visualizer/screens/tabs_screen.dart';
-import 'package:codeforces_visualizer/screens/user_info_screen.dart';
 import 'package:codeforces_visualizer/screens/user_auth_screen.dart';
 import 'package:flutter/material.dart';
 
