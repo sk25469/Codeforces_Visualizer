@@ -2,6 +2,7 @@ import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:codeforces_visualizer/models/upcoming_contest.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 /// takes the [UpcomingContest] and displays the contents
 class ContestDetail extends StatefulWidget {
@@ -16,6 +17,10 @@ class ContestDetail extends StatefulWidget {
 }
 
 class _ContestDetailState extends State<ContestDetail> {
+  final _url = "https://codeforces.com/contests";
+
+  void _launchURL() async => await launch(_url);
+
   Map<int, bool> isAdded = {};
   void _addToCalender(int index, List<UpcomingContest> upcomingContest) {
     int eventStartTime = upcomingContest[index].startTime;
@@ -60,7 +65,7 @@ class _ContestDetailState extends State<ContestDetail> {
           child: Card(
             elevation: 5,
             child: InkWell(
-              onTap: () {},
+              onTap: _launchURL,
               child: Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Row(

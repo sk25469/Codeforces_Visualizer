@@ -87,10 +87,9 @@ class _buildListView extends StatelessWidget {
     _upcomingContests.sort((a, b) => a.compareTo(b));
 
     return Container(
-      height: (mediaQuery.size.height -
-              mediaQuery.padding.top -
-              mediaQuery.padding.bottom) *
-          0.6,
+      height:
+          (mediaQuery.size.height - mediaQuery.padding.top - mediaQuery.padding.bottom) *
+              0.59,
       child: _upcomingContests.isNotEmpty
           ? ContestDetail(upcomingContest: _upcomingContests)
           : const Text('No upcoming Contests Ahead!'),

@@ -46,6 +46,7 @@ dependencies:
   http: ^0.13.3
   shared_preferences: ^2.0.8
   add_2_calendar: ^2.1.2
+  url_launcher: ^6.0.12
 
 dev_dependencies:
   flutter_test:
