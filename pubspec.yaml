@@ -47,6 +47,7 @@ dependencies:
   shared_preferences: ^2.0.8
   add_2_calendar: ^2.1.2
   url_launcher: ^6.0.12
+  permission_handler: ^8.2.5
 
 dev_dependencies:
   flutter_test:

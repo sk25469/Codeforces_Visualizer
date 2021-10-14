@@ -2,6 +2,7 @@ import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:codeforces_visualizer/models/upcoming_contest.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// takes the [UpcomingContest] and displays the contents
@@ -44,6 +45,7 @@ class _ContestDetailState extends State<ContestDetail> {
     );
     setState(() {
       Add2Calendar.addEvent2Cal(event);
+      print("Added to calender");
       if (isAdded[index] == null) {
         isAdded[index] = true;
       }
@@ -158,8 +160,32 @@ class _ContestDetailState extends State<ContestDetail> {
                       child: IconButton(
                         onPressed: isAdded[index] != null
                             ? null
-                            : () {
-                                _addToCalender(index, widget.upcomingContest);
+                            : () async {
+                                var status = await Permission.calendar.request();
+                                if (status.isGranted) {
+                                  _addToCalender(index, widget.upcomingContest);
+                                } else if (status.isDenied) {
+                                  return;
+                                } else {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) => AlertDialog(
+                                      title: const Text('Calender Permission'),
+                                      content: const Text(
+                                          'This app needs calender access to create events'),
+                                      actions: <Widget>[
+                                        RaisedButton(
+                                          child: const Text('Deny'),
+                                          onPressed: () => Navigator.of(context).pop(),
+                                        ),
+                                        RaisedButton(
+                                          child: const Text('Settings'),
+                                          onPressed: () => openAppSettings(),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }
                               },
                         icon: isAdded[index] != null
                             ? const Icon(Icons.notifications_active)
