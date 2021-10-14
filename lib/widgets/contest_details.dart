@@ -166,26 +166,27 @@ class _ContestDetailState extends State<ContestDetail> {
                                   _addToCalender(index, widget.upcomingContest);
                                 } else if (status.isDenied) {
                                   return;
-                                } else {
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) => AlertDialog(
-                                      title: const Text('Calender Permission'),
-                                      content: const Text(
-                                          'This app needs calender access to create events'),
-                                      actions: <Widget>[
-                                        RaisedButton(
-                                          child: const Text('Deny'),
-                                          onPressed: () => Navigator.of(context).pop(),
-                                        ),
-                                        RaisedButton(
-                                          child: const Text('Settings'),
-                                          onPressed: () => openAppSettings(),
-                                        ),
-                                      ],
-                                    ),
-                                  );
                                 }
+                                // else {
+                                //   showDialog(
+                                //     context: context,
+                                //     builder: (BuildContext context) => AlertDialog(
+                                //       title: const Text('Calender Permission'),
+                                //       content: const Text(
+                                //           'This app needs calender access to create events'),
+                                //       actions: <Widget>[
+                                //         RaisedButton(
+                                //           child: const Text('Deny'),
+                                //           onPressed: () => Navigator.of(context).pop(),
+                                //         ),
+                                //         RaisedButton(
+                                //           child: const Text('Settings'),
+                                //           onPressed: () => openAppSettings(),
+                                //         ),
+                                //       ],
+                                //     ),
+                                //   );
+                                // }
                               },
                         icon: isAdded[index] != null
                             ? const Icon(Icons.notifications_active)
