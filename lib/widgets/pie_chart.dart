@@ -71,10 +71,10 @@ List<Widget> legendsList(List<ProblemDetailByTags> tagData) {
       tagColor.add(Tag(color, tag));
     },
   );
-  for (int i = 0; i < tagData.length; i++) {
-    print(
-        'Tag name ${tagData[i].tag} \n No. of questions : ${tagData[i].quesCnt}');
-  }
+  // for (int i = 0; i < tagData.length; i++) {
+  //   // print(
+  //   // 'Tag name ${tagData[i].tag} \n No. of questions : ${tagData[i].quesCnt}');
+  // }
   return tagColor.map(
     (value) {
       return Row(
@@ -91,11 +91,10 @@ List<Widget> legendsList(List<ProblemDetailByTags> tagData) {
           Text(value.tag),
           Container(width: 5.0),
           Text(tagData.indexWhere((element) => element.tag == value.tag) != -1
-              ? tagData[
-                      tagData.indexWhere((element) => element.tag == value.tag)]
+              ? tagData[tagData.indexWhere((element) => element.tag == value.tag)]
                   .quesCnt
                   .toString()
-              : "0")
+              : "0"),
         ],
       );
     },

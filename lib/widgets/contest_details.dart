@@ -74,7 +74,7 @@ class _ContestDetailState extends State<ContestDetail> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     // contest start time
-                    Container(
+                    SizedBox(
                       width: mediaQuery * 0.15,
                       child: Column(
                         // ignore: prefer_const_literals_to_create_immutables
@@ -112,7 +112,7 @@ class _ContestDetailState extends State<ContestDetail> {
                       ),
                     ),
 
-                    Container(
+                    SizedBox(
                       width: mediaQuery * 0.45,
                       child: Column(
                         // ignore: prefer_const_literals_to_create_immutables
@@ -132,7 +132,7 @@ class _ContestDetailState extends State<ContestDetail> {
                         ],
                       ),
                     ),
-                    Container(
+                    SizedBox(
                       width: mediaQuery * 0.18,
                       child: Column(
                         // ignore: prefer_const_literals_to_create_immutables
@@ -155,7 +155,7 @@ class _ContestDetailState extends State<ContestDetail> {
                       ),
                     ),
 
-                    Container(
+                    SizedBox(
                       width: mediaQuery * 0.12,
                       child: IconButton(
                         onPressed: isAdded[index] != null
@@ -167,26 +167,6 @@ class _ContestDetailState extends State<ContestDetail> {
                                 } else if (status.isDenied) {
                                   return;
                                 }
-                                // else {
-                                //   showDialog(
-                                //     context: context,
-                                //     builder: (BuildContext context) => AlertDialog(
-                                //       title: const Text('Calender Permission'),
-                                //       content: const Text(
-                                //           'This app needs calender access to create events'),
-                                //       actions: <Widget>[
-                                //         RaisedButton(
-                                //           child: const Text('Deny'),
-                                //           onPressed: () => Navigator.of(context).pop(),
-                                //         ),
-                                //         RaisedButton(
-                                //           child: const Text('Settings'),
-                                //           onPressed: () => openAppSettings(),
-                                //         ),
-                                //       ],
-                                //     ),
-                                //   );
-                                // }
                               },
                         icon: isAdded[index] != null
                             ? const Icon(Icons.notifications_active)

@@ -86,7 +86,7 @@ class _buildListView extends StatelessWidget {
 
     _upcomingContests.sort((a, b) => a.compareTo(b));
 
-    return Container(
+    return SizedBox(
       height:
           (mediaQuery.size.height - mediaQuery.padding.top - mediaQuery.padding.bottom) *
               0.59,
