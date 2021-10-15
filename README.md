@@ -4,4 +4,4 @@
 
 It used the Codeforces Public API to get the contests and the user data.
 
-To install the app - [Codeforces Visualizer](https://drive.google.com/file/d/19me_K8d5ORmkO0FHlXgBjRWgvYj6EIpT/view?usp=sharing)
+To install the app - [Codeforces Visualizer](https://drive.google.com/file/d/1-RjUkfhfjxeMtYB4qr5ROJlJ_30SJsOr/view?usp=sharing)
