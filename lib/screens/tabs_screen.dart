@@ -32,10 +32,12 @@ class _TabsScreenState extends State<TabsScreen> {
       },
     ];
 
+    var appBar = AppBar(
+      title: Text(_pages[_selectedPageIndex]['title'] as String),
+    );
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text(_pages[_selectedPageIndex]['title'] as String),
-      ),
+      appBar: appBar,
       body: _pages[_selectedPageIndex]['page'] as Widget,
       bottomNavigationBar: TitledBottomNavigationBar(
         currentIndex: _selectedPageIndex,

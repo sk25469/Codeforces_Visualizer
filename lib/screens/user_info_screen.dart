@@ -60,7 +60,7 @@ FutureBuilder<List<Problem>> _buildBody(BuildContext context, String userName) {
 class _buildCharts extends StatelessWidget {
   final List<Problem>? posts;
   final String userName;
-  _buildCharts(this.posts, this.userName);
+  const _buildCharts(this.posts, this.userName);
 
   @override
   Widget build(BuildContext context) {

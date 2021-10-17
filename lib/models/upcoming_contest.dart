@@ -32,7 +32,7 @@ class Contests {
       final List<UpcomingContest> loadedContests = [];
 
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
-      // print(extractedData['result']);
+      print(extractedData['result']);
       final allContests = extractedData['result'] as List<dynamic>;
 
       for (int i = 0; i < allContests.length; i++) {
@@ -48,6 +48,7 @@ class Contests {
 
       return loadedContests;
     } catch (error) {
+      print(error);
       rethrow;
     }
   }

@@ -58,7 +58,7 @@ class ContestScreen extends StatelessWidget {
 
 // ignore: camel_case_types
 class _buildListView extends StatelessWidget {
-  _buildListView({
+  const _buildListView({
     Key? key,
     required this.mediaQuery,
     required this.contests,
@@ -86,10 +86,10 @@ class _buildListView extends StatelessWidget {
 
     _upcomingContests.sort((a, b) => a.compareTo(b));
 
-    return SizedBox(
-      height:
-          (mediaQuery.size.height - mediaQuery.padding.top - mediaQuery.padding.bottom) *
-              0.59,
+    return Expanded(
+      // height:
+      //     (mediaQuery.size.height - mediaQuery.padding.top - mediaQuery.padding.bottom) *
+      //         0.59,
       child: _upcomingContests.isNotEmpty
           ? ContestDetail(upcomingContest: _upcomingContests)
           : const Text('No upcoming Contests Ahead!'),
